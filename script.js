@@ -57,10 +57,13 @@ class Trello {
 
         $("[id^='card-']").draggable({
             revert: true,
+            handle: ".drag-handle",
             start: function () {
                 $(this).addClass('z-2');
+            },
+            stop: function () {
+                $(this).removeClass('z-2');
             }
-
         });
 
         Object.values(Status).forEach(status => {
@@ -142,10 +145,11 @@ function designedCard(task) {
        <div id="card-${task.id}" class="accordion-item bg-white border rounded shadow-sm mb-3" data-id="${task.id}">
             <h2 class="accordion-header" id="heading-${task.id}">
                 <div class="accordion-button collapsed bg-light text-dark d-flex justify-content-between align-items-center no-click-drag"
-                     data-bs-toggle="collapse"
-                     data-bs-target="#collapse-${task.id}"
-                     aria-expanded="false"
-                     aria-controls="collapse-${task.id}">
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse-${task.id}"
+                    aria-expanded="false"
+                    aria-controls="collapse-${task.id}">
+                    <span class="drag-handle me-2"><i class="bi bi-arrows-move"></i></span>
                     <span>${task.title}</span>
                 </div>
             </h2>
